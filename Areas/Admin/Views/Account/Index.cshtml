@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ChiTietChucNang>
+@{
+    ViewData["Title"] = "Danh sách tài khoản quản trị";
+}
+<main>
+    <div class="container-fluid px-4">
+        <h3 class="mt-4">Danh sách người truy cập</h3>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="QuanTri">Trang quản trị</a></li>
+          
+        </ol>
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                    <div class="row">
+                        <div class="col m-1 ">
+                            <h3><a asp-action="Create" asp-controller="Account" class="btn btn-primary">Phân quyền chức năng người quản trị</a></h3>
+                        </div>
+                        <div class="col ">
+                            <h3><a asp-action="ThemNV" asp-controller="Account" class="btn btn-primary">Thêm người truy cập</a></h3>
+                        </div>
+                      
+                          <div class="col">
+                            <select class="form-control" asp-items="ViewBag.QuyenTruyCap">
+                        <option value="0" disabled selected>--Chọn Quyền--</option>
+
+                        </select>
+                        </div>
+
+                    </div>
+
+                    <div class="datatable-container">
+                        <table id="myTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th data-sortable="true">
+                                        #
+                                    <th data-sortable="true">
+                                        Tên 
+                                    </th>
+                                    <th data-sortable="true">
+                                     Địa chỉ
+                                    <th data-sortable="true">
+                                        Số điện thoại
+                                    </th>
+                                    <th>Quyền truy cập</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(Model != null)
+                                {
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr data-index="0">
+                                            <td>@item.NhanVien.MaNV</td>
+                                            <td>@item.NhanVien.TenNV</td>
+                                            <td>@item.NhanVien.DiaChi</td>
+                                            <td>@item.NhanVien.DienThoai</td>
+                                            <td>@item.ChucNang.TenQuyen</td>
+                                          
+
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<

@@ -1,0 +1,149 @@
+﻿@model WebDatMonAn.Models.ViewModel.MuaHangVM
+@{
+	ViewData["Title"] = "Mua hàng";
+	List<GioHangModel> giohang = ViewBag.GioHang ?? new List<GioHangModel>();
+}
+@Html.Partial("_SiderPartial")
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+
+			<form asp-action="ThanhToan"  asp-controller="ThanhToan" method="post">
+
+			
+			<div class="col-md-7">
+				<!-- Billing Details -->
+				<div class="billing-details">
+					<div class="section-title">
+						<h3 class="title">THÔNG TIN ĐƠN HÀNG</h3>
+					</div>
+					
+					
+					<input hidden asp-for="MaKH">
+					<div class="form-group">
+						<input class="input" type="text" asp-for="TenTK" placeholder="Họ và tên">
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" asp-for="SoDienThoai" placeholder="Số điện thoại">
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" asp-for="Email" placeholder="Địa chỉ email">
+					</div>
+
+					<div class="form-group">
+						<input class="input" type="text" asp-for="DiaChi" placeholder="Địa chỉ nhận hàng">
+					</div>
+
+					<div class="form-group">
+						<select class="form-control" asp-for="TenTinhThanh" asp-items="ViewBag.dsTinhThanh">
+							<option value="0">Chọn Tỉnh Thành</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select class="form-control" asp-for="TenQuanHuyen" asp-items="ViewBag.dsQuanHuyen">
+							<option value="0">Chọn Quận Huyện</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select class="form-control" asp-for="TenPhuongXa" asp-items="ViewBag.dsPhuongXa">
+							<option value="0">Chọn Phường Xã</option>
+						</select>
+					</div>
+					
+					<div class="form-group">
+						<div class="input-checkbox">
+							<input type="checkbox" id="create-account">
+							<label for="create-account">
+								<span></span>
+								Create Account?
+							</label>
+							<div class="caption">
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+								<input class="input" type="password" name="password" placeholder="Enter Your Password">
+							</div>
+						</div>
+					</div>
+				</div>
+			
+
+			</div>
+
+			<!-- Order Details -->
+			<div class="col-md-5 order-details">
+				<div class="section-title text-center">
+					<h3 class="title">THÔNG TIN ĐƠN HÀNG</h3>
+				</div>
+				<div class="order-summary">
+					<div class="order-col">
+						<div><strong>MÓN ĂN</strong></div>
+						<div><strong>THÀNH TIỀN</strong></div>
+					</div>
+					<div class="order-products">
+						@if (giohang.Count()>0)
+						{
+							foreach (var item in giohang)
+							{
+								<div class="order-col">
+									<div>@item.SoLuong x @item.TenMonAn</div>
+									<div>@item.ThanhTien.ToString("#,###")</div>
+								</div>
+							}
+						}
+						
+						
+					</div>
+					<div class="order-col">
+						<div>Shiping</div>
+						<div><strong>15.000 đ</strong></div>
+					</div>
+					<div class="order-col">
+						<div><strong>Tổng tiền:</strong></div>
+						<div><strong class="order-total">@giohang.Sum(x=>x.ThanhTien + 15000).ToString("#,##0")</strong></div>
+					</div>
+				</div>
+				<div class="payment-method">
+					<div class="input-radio">
+						<input type="radio" name="payment" id="payment-1">
+						<label for="payment-1">
+							<span></span>
+							Direct Bank Transfer
+						</label>
+						<div class="caption">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						</div>
+					</div>
+					<div class="input-radio">
+						<input type="radio" name="payment" id="payment-2">
+						<label for="payment-2">
+							<span></span>
+							Cheque Payment
+						</label>
+						<div class="caption">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						</div>
+					</div>
+					<div class="input-radio">
+						<input type="radio" name="payment" id="payment-3">
+						<label for="payment-3">
+							<span></span>
+							Paypal System
+						</label>
+						<div class="caption">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						</div>
+					</div>
+				</div>
+				
+				<button type="submit" class="primary-btn order-submit">XÁC NHẬN ĐẶT HÀNG</button>
+			</div>
+			</form>
+			
+			<!-- /Order Details -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->

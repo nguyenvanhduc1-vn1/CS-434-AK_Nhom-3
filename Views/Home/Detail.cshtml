@@ -1,0 +1,132 @@
+﻿<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="breadcrumb-tree">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Chi tiết món ăn</a></li>
+
+					<li class="active">@Model.TenMonAn</li>
+				</ul>
+			</div>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- Product main img -->
+			<div class="col-md-5 col-md-push-2">
+				<div id="product-main-img">
+
+
+					<div class="product-preview">
+						<img src="~/image/monan/@Model.HinhAnh" alt="@Model.TenMonAn">
+					</div>
+
+
+				</div>
+			</div>
+			<!-- /Product main img -->
+			<!-- Product thumb imgs -->
+			<div class="col-md-2  col-md-pull-5">
+			</div>
+			<!-- /Product thumb imgs -->
+			<!-- Product details -->
+			<div class="col-md-5">
+				<div class="product-details">
+					<h2 class="product-name">@Model.TenMonAn</h2>
+					<h3 class="product-name">@Model.DiaChiQuan</h3>
+					<h4 class="product-name"><a style="color:#0288d1;" asp-action="index" asp-controller="DanhGia">Xem lượt đánh giá trên food</a></h4>
+					<div>
+						<div class="product-rating">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star-o"></i>
+						</div>
+						<a class="review-link" href="#">10 Review(s) | Add your review</a>
+					</div>
+					<div>
+						<h3 class="product-price">@Model.DonGia.ToString("#,###0") đ </h3>
+						
+					</div>
+					<p>@Model.MoTa</p>
+
+					    <form asp-action="ThemCart" asp-controller="GioHang" asp-route-Id="@Model.MaMonAn">
+
+					<div class="add-to-cart">
+						<div class="qty-label">
+							Qty
+							<div class="input-number">
+								<input type="number" value="1" name="quantity">
+								<span class="qty-up">+</span>
+								<span class="qty-down">-</span>
+							</div>
+						</div>
+						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Mua Ngay</button>
+					</div>
+					</form>
+
+
+
+					<ul class="product-links">
+						<li>Danh Mục:</li>
+						<li><a href="#">@Model.DanhMuc.TenDanhMuc</a></li>
+
+					</ul>
+
+					<ul class="product-links">
+						<li>Share:</li>
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+					</ul>
+
+				</div>
+			</div>
+			<!-- /Product details -->
+			<!-- /product tab -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+<!-- Section -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+
+			<div class="col-md-12">
+				<div class="section-title text-center">
+					<h3 class="title">Món ăn Khác</h3>
+				</div>
+			</div>
+
+
+
+			<!-- /product -->
+			<!-- product -->
+			<vc:mon-ans></vc:mon-ans>
+			<!-- /product -->
+
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /Section -->

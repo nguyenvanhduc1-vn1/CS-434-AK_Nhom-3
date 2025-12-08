@@ -1,0 +1,189 @@
+﻿@model X.PagedList.IPagedList<WebDatMonAn.Models.MonAnModel>
+
+@using X.PagedList.Mvc.Core;
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách món ăn" +CurrentPage;
+}
+<main>
+    <div class="container-fluid px-4">
+        <h3 class="mt-4">Danh Sách món ăn : trang + @CurrentPage</h3>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="QuanTri">Trang quản trị</a></li>
+            <li class="breadcrumb-item active"></li>
+        </ol>
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                 
+                       <div class="row">
+                          <div class="col">
+                               <h3><a asp-action="Create" asp-controller="MonAn" class="btn btn-primary">Thêm mới món ăn</a></h3>
+                          </div>
+                           <div class="col ">
+                               <input id="keyword" name="keyword" type="text" class="form-control" style="width:35%;" placeholder="Tìm kiếm" />
+                           </div>
+                           <div class="col">
+                               <select class="form-control" id="txtCateID" name="txtCateID" asp-items="ViewBag.DanhMuc">
+                        <option value="0" selected>--Chọn Danh Mục--</option>
+                        <option value="all"> Chọn tất cả </option>
+
+                        </select>
+                           </div>
+                          
+
+                       </div>
+                  
+
+                    <div class="datatable-container">
+                        <table id="myTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" data-sortable="true">
+                                        #
+                                    <th class="text-center" data-sortable="true">
+                                        Tên món ăn
+                                    </th>
+                                    <th class="text-center" data-sortable="true">
+                                      Hình ảnh
+                                   
+                                    <th class="text-center"  data-sortable="true">Tên Danh mục</th>
+                                    <th class="text-center" data-sortable="true">Trạng Thái</th>
+                                    <th class="text-center" data-sortable="true">Manager</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="records_table">
+                                @foreach (var item in Model)
+                                {
+                                    <tr data-index="0">
+                                        <td class="text-center align-middle">@item.MaMonAn</td>
+                                        <td class="text-center align-middle">@item.TenMonAn</td>
+                                        <td class="text-center align-middle"><img src="~/image/monan/@item.HinhAnh" style="height:100px;" /></td>
+                                        <td class="text-center align-middle">@item.DanhMuc.TenDanhMuc</td>
+                                       
+
+                                        @if (item.TrangThai == 1)
+                                        {
+                                            <td class="text-center align-middle">
+                                                <button class="btn btn-primary">Hiển thị</button>
+                                            </td class="text-center">
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center align-middle">
+                                                <button class="btn btn-warning"> Không Hiển thị</button>
+                                            </td>
+                                        }
+
+                                        <td class="text-center align-middle">
+                                            <a class="btn btn-warning " asp-action="ChiTiet" asp-controller="MonAn" asp-route-Id="@item.MaMonAn">Xem chi tiết</a>
+                                            <a class="btn btn-warning" asp-action="Edit" asp-controller="MonAn" asp-route-Id="@item.MaMonAn" >Edit</a>
+                                            <a class="btn btn-danger" asp-action="Delete" asp-controller="MonAn" asp-route-Id="@item.MaMonAn" >Xóa</a>
+                                            
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="pagination-container">
+						@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+					</div>
+
+					<style>
+						.pagination-container {
+							display: flex;
+							justify-content: center; /* Canh giữa thanh phân trang */
+						}
+
+						.pagination {
+							display: flex;
+							list-style: none; /* Loại bỏ các dấu chấm đầu dòng */
+							padding: 0; /* Loại bỏ padding */
+							margin: 0; /* Loại bỏ margin */
+						}
+
+							.pagination li {
+								margin: 0 5px; /* Khoảng cách giữa các trang */
+							}
+
+								.pagination li a, .pagination li span {
+									display: block;
+									padding: 8px 12px;
+									text-decoration: none; /* Bỏ gạch chân */
+									color: #007bff; /* Màu chữ */
+								}
+
+								.pagination li.active span {
+									font-weight: bold; /* In đậm trang hiện tại */
+									color: #000; /* Màu chữ của trang hiện tại */
+								}
+
+								.pagination li.disabled span {
+									color: #6c757d; /* Màu chữ của trang bị disable */
+								}
+					</style>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+     <script>
+$(document).ready(function () {
+   
+    $("#txtCateID").change(function () {
+        var catID = $(this).children(":selected").val();
+        catID = parseFloat(catID);
+
+        console.log("Selected Category ID:", catID); 
+
+        $('#txtCateID option').prop('selected', false);
+        $("#txtCateID > [value=" + catID + "]").prop('selected', true);
+
+        $.ajax({
+            url: '/Admin/MonAn/Loc',
+            datatype: 'json',
+            type: "GET",
+            data: {
+                CateId: catID
+            },
+            async: true,
+            success: function (results) {
+                console.log("Ajax Success:", results); 
+                if (results.status == "success") {
+                    window.location.href = results.redirectUrl;
+                }
+            },
+            error: function (xhr) {
+                console.log("Ajax Error:", xhr); 
+                alert('error');
+            }
+        });
+    });
+
+    $("#keyword").keyup(function () {
+        var strkeyword = $('#keyword').val();
+        $.ajax({
+            url: '/Admin/Search/TimMonAn/',
+            datatype: 'json',
+            type: "POST",
+            data: { keyword: strkeyword },
+            async: true,
+            success: function (results) {
+                $("#records_table").html(results);
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    });
+});
+</script>
+
+    }
+</main>
+<

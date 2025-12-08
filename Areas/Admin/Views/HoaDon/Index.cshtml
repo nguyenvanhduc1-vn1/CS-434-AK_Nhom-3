@@ -1,0 +1,146 @@
+﻿@model X.PagedList.IPagedList<WebDatMonAn.Models.HoaDonModel>
+
+@using X.PagedList.Mvc.Core;
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách hóa đơn" + CurrentPage;
+}
+<main>
+    <div class="container-fluid px-4">
+        <h3 class="mt-4">Danh Sách hóa đơn : trang + @CurrentPage</h3>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="QuanTri">Trang quản trị</a></li>
+            <li class="breadcrumb-item active"></li>
+        </ol>
+
+        <div class="card mb-4" id="records_table">
+            <div class="card-body">
+                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                    <div class="datatable-container">
+                        <table  class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" data-sortable="true">#</th>
+                                    <th class="text-center" data-sortable="true">Đơn hàng</th>
+                                    <th class="text-center" data-sortable="true">Ngày Mua</th>
+                                    <th class="text-center" data-sortable="true">Trạng thái</th>
+                                    <th class="text-center" data-sortable="true">Trạng thái giao hàng</th>
+                                    <th class="text-center" data-sortable="true">Manager</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                @foreach (var item in Model)
+                                {
+                                    <tr data-index="0">
+                                        <td class="text-center align-middle">@item.MaHD</td>
+                                        <td class="text-center align-middle">@item.KhachHang.TenTK</td>
+                                        <td class="text-center align-middle">@item.NgayDat</td>
+                                        @if (item.TrangThaiDonHang == 1)
+                                        {
+                                            <td class="text-center align-middle">
+                                                <button class="btn btn-primary btn-capnhat-trangthai" data-id="@item.MaHD">chưa thanh toán</button>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center align-middle">
+                                                <button class="btn btn-warning disabled">Đã thanh toán</button>
+                                            </td>
+                                        }
+                                        @if (item.TrangThaiGiaoHang == 1)
+                                        {
+                                            <td class="text-center align-middle">
+                                                <p><b class="text-warning">Đã giao</b></p>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center align-middle">
+                                                <p><b class="text-primary">Chưa giao</b></p>
+                                            </td>
+                                        }
+                                        <td class="text-center align-middle">
+                                            <a class="btn btn-warning" asp-action="ChiTiet" asp-controller="HoaDon" asp-route-Id="@item.MaHD">Xem chi tiết</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="pagination-container">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<style>
+    .pagination-container {
+        display: flex;
+        justify-content: center; /* Canh giữa thanh phân trang */
+        margin-top: 20px; /* Khoảng cách với phần nội dung trang */
+    }
+
+    .pagination {
+        display: flex;
+        list-style: none; /* Loại bỏ các dấu chấm đầu dòng */
+        padding: 0; /* Loại bỏ padding */
+        margin: 0; /* Loại bỏ margin */
+    }
+
+        .pagination li {
+            margin: 0 5px; /* Khoảng cách giữa các trang */
+        }
+
+            .pagination li a, .pagination li span {
+                display: block;
+                padding: 8px 12px;
+                text-decoration: none; /* Bỏ gạch chân */
+                color: #007bff; /* Màu chữ */
+            }
+
+            .pagination li.active span {
+                font-weight: bold; /* In đậm trang hiện tại */
+                color: #000; /* Màu chữ của trang hiện tại */
+            }
+
+            .pagination li.disabled span {
+                color: #6c757d; /* Màu chữ của trang bị disable */
+            }
+</style>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            function loadData() {
+                $.ajax({
+                    url: '/Admin/HoaDon/Index', 
+                    type: 'GET',
+                    success: function (data) {
+                        $('#records_table').html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Đã xảy ra lỗi khi tải lại dữ liệu: ' + error);
+                    }
+                });
+            }
+
+            $('.btn-capnhat-trangthai').on('click', function () {
+                var id = $(this).data('id');
+                $.ajax({
+                    url: '/Admin/HoaDon/CapNhatTrangThai/' + id,
+                    type: 'POST',
+                    success: function (data) {
+                        alert('Cập nhật trạng thái thành công');
+                        loadData(); // Sau khi cập nhật thành công, gọi lại hàm loadData để tải lại dữ liệu mới
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Đã xảy ra lỗi: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,62 @@
+﻿@model List<HoaDonModel>
+
+@{
+    ViewData["Title"] = "Xem Don Hang";
+}
+@Html.Partial("_SiderPartial")
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Ngày Mua hàng</th>
+                                <th>Ngày Ship Hàng</th>
+                                <th>Trạng thái</th>
+                                <th>Địa chỉ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.NgayDat</td>
+                                    <td>@item.NgayGiao</td>
+                                    <td>
+                                        @if (item.TrangThaiDonHang == 1)
+                                        {
+                                            <span>chưa thanh toán</span>
+                                        }
+                                        else
+                                        {
+                                            <span>đã thanh toán</span>
+                                        }
+                                    </td>
+                                    <td>@item.DiaChi</td>
+                                    <td>
+                                        <a class="xemdonhang" asp-action="ChiTiet" asp-controller="TaiKhoan" asp-route-id="@item.MaHD">Xem chi tiết</a>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div id="records_table">
+                        <!-- Nội dung sẽ được cập nhật từ Ajax -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+}

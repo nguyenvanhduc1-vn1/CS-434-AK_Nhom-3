@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "_SiderPartial";
+}
+
+<nav id="navigation">
+	<!-- container -->
+	<div class="container">
+		<!-- responsive-nav -->
+		<div id="responsive-nav">
+			<!-- NAV -->
+			<ul class="main-nav nav navbar-nav">
+				<li class="active"><a asp-action="Index" asp-controller="Home" >Home</a></li>
+				<li><a asp-action="Tatcamonan" asp-controller="Home">Tất cả món ăn</a></li>
+				
+			     <vc:danh-mucs></vc:danh-mucs>
+			</ul>
+			<!-- /NAV -->
+		</div>
+		<!-- /responsive-nav -->
+	</div>
+	<!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+<!-- SECTION -->

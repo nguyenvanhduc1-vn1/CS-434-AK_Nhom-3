@@ -1,0 +1,18 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebDatMonAn.Models.ViewModel
+{
+    public class NhanVienViewModelcs
+    {
+
+        [MaxLength(100)]
+        [Required(ErrorMessage = " vui lòng nhập tên tài khoản")]
+       
+        public string TenNV { get; set; }
+        [Display(Name = "Mật khẩu")]
+        [Required(ErrorMessage = " Vui lòng nhập mật khẩu")]
+        [MinLength(5, ErrorMessage = "Bạn cần đặt mật khẩu tối thiểu 5 ký tự")]
+        [DataType(DataType.Password)]
+        public string MatKhau { get; set; }
+    }
+}

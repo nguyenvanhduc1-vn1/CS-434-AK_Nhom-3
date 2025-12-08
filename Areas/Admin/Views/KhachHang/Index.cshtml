@@ -1,0 +1,137 @@
+﻿@model X.PagedList.IPagedList<WebDatMonAn.Models.KhachHangModel>
+
+@using X.PagedList.Mvc.Core;
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách khách hàng" +CurrentPage;
+}
+<main>
+    <div class="container-fluid px-4">
+        <h3 class="mt-4">Danh Sách khách hàng :trang @CurrentPage</h3>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="QuanTri">Trang quản trị</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                    <div class="row">
+                        
+                        <div class="col m-2">
+                            <input id="keyword" name="keyword" type="text" class="form-control" style="width:50%;" placeholder="Tìm kiếm" />
+                        </div>
+                       
+
+                    </div>
+
+                    <div class="datatable-container">
+                        <table id="myTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th data-sortable="true">
+                                        #
+                                    <th data-sortable="true">
+                                        Tên
+                                    </th>
+                                    <th data-sortable="true">
+                                        Địa chỉ
+                                    <th data-sortable="true">
+                                        Số điện thoại
+                                    </th>
+                                    <th>Email</th>
+                                    <th>Tỉnh /Thành</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="records_table">
+                                @if (Model != null)
+                                {
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr data-index="0">
+                                            <td>@item.MaKH</td>
+                                            <td>@item.TenTK</td>
+                                            <td>@item.DiaChi</td>
+                                            <td>@item.SoDienThoai</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.DiaDiem.TenTinhThanh</td>
+                                          
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <div class="pagination-container">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+                        </div>
+
+                        <style>
+                            .pagination-container {
+                                display: flex;
+                                justify-content: center; /* Canh giữa thanh phân trang */
+                            }
+
+                            .pagination {
+                                display: flex;
+                                list-style: none; /* Loại bỏ các dấu chấm đầu dòng */
+                                padding: 0; /* Loại bỏ padding */
+                                margin: 0; /* Loại bỏ margin */
+                            }
+
+                                .pagination li {
+                                    margin: 0 5px; /* Khoảng cách giữa các trang */
+                                }
+
+                                    .pagination li a, .pagination li span {
+                                        display: block;
+                                        padding: 8px 12px;
+                                        text-decoration: none; /* Bỏ gạch chân */
+                                        color: #007bff; /* Màu chữ */
+                                    }
+
+                                    .pagination li.active span {
+                                        font-weight: bold; /* In đậm trang hiện tại */
+                                        color: #000; /* Màu chữ của trang hiện tại */
+                                    }
+
+                                    .pagination li.disabled span {
+                                        color: #6c757d; /* Màu chữ của trang bị disable */
+                                    }
+                        </style>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: '/Admin/Search/TimKH/',
+                    datatype: 'json',
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                })
+            })
+        });
+    </script>
+}
+

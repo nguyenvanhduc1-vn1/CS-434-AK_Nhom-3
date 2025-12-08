@@ -1,0 +1,31 @@
+﻿@foreach (var item in Model)
+{
+	<div class="col-md-4 col-xs-6">
+		<div class="product">
+			<div class="product-img">
+				<img src="~/image/monan/@item.HinhAnh" alt="@item.TenMonAn" style="height:180px;">
+				<div class="product-label">
+					<span class="sale">-30%</span>
+
+				</div>
+			</div>
+			<div class="product-body">
+				<p class="product-category">@item.DanhMuc.TenDanhMuc</p>
+				<h3 class="product-name"><a asp-action="Detail" asp-controller="Home" asp-route-Id="@item.MaMonAn">@(item.TenMonAn.Length > 16 ? item.TenMonAn.Substring(0, 16) : item.TenMonAn)...</a></h3>
+				<h4 class="product-price">@item.DonGia.ToString("#,###0") đ </h4>
+				<div class="product-rating">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+				</div>
+
+			</div>
+			<div class="add-to-cart">
+				<a asp-action="ThemCart" asp-controller="GioHang" asp-route-Id="@item.MaMonAn" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+			</div>
+		</div>
+	</div>
+	<!-- /product -->
+}

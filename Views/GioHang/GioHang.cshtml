@@ -1,0 +1,199 @@
+﻿@using WebDatMonAn.Models.ViewModel;
+@model GioHangViewModel
+
+<style>
+    .container1 {
+        width: 80%;
+        margin: 50px auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    table {
+        width: 70%;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    thead {
+        background-color: #f8f8f8;
+    }
+
+    th, td {
+        padding: 20px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #666;
+    }
+
+    td {
+        font-size: 16px;
+        color: #333;
+    }
+
+        td img {
+            width: 60px;
+            border-radius: 10px;
+        }
+
+    .quantity-btn {
+        padding: 5px 10px;
+        background-color: #eee;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 5px;
+        font-size: 16px;
+    }
+
+        .quantity-btn:hover {
+            background-color: #ddd;
+        }
+
+    .remove-btn {
+        background-color: #ff6b6b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+
+        .remove-btn:hover {
+            background-color: #ff4c4c;
+        }
+
+    .cart-total {
+        width: 25%;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        font-size: 16px;
+        color: #333;
+    }
+
+        .cart-total p {
+            margin: 10px 0;
+        }
+
+            .cart-total p strong {
+                font-size: 18px;
+            }
+
+    .checkout-btn {
+        width: 100%;
+        padding: 15px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 20px;
+    }
+
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
+
+</style>
+@Html.Partial("_SiderPartial")
+
+<div class="container1">
+    <table>
+        <thead>
+            <tr>
+                <th>Hình ảnh</th>
+                <th>Món ăn</th>
+                <th>Gía</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Hủy</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.GioHangs.Count > 0)
+            {
+                @foreach (var item in Model.GioHangs)
+                {
+                    <tr>
+                        <td><img src="~/image/monan/@item.HinhAnh" alt="@item.TenMonAn"></td>
+                        <td><a asp-action="Detail" asp-controller="Home" asp-route-Id="@item.MaMonAn" style="text-decoration:none; color:black;"><p class="mb-0 mt-4">@item.TenMonAn</p></a></td>
+                        <td>@item.DonGia.ToString("#,###0")</td>
+                        <td>
+                            <div class="add-to-cart">
+                                <div class="qty-label">
+                                    <div class="input-number">
+                                        <input type="number" value="@item.SoLuong" name="quantity" style="width:100%;">
+                                        <a asp-action="Decrease" asp-controller="GioHang" asp-route-Id="@item.MaMonAn">
+                                            <span class="qty-up">-</span>
+                                        </a>
+                                        <a asp-action="Increase" asp-controller="GioHang" asp-route-Id="@item.MaMonAn">
+                                            <span class="qty-down">+</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="item-total">@item.ThanhTien.ToString("#,###0")</td>
+                        <td>
+                            <a asp-action="Remove" asp-controller="GioHang" asp-route-Id="@item.MaMonAn">
+                                <button type="button" class="remove-btn">X</button>
+                            </a>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td class="text-end align-center" colspan="6"><a asp-action="XoaHet" asp-controller="GioHang" class="btn btn-danger">Xóa hết</a></td>
+                </tr>
+            }
+            else
+            {
+            <td colspan="6">
+                <h4>Không có món ăn nào trong giỏ hàng của bạn</h4>
+            </td>
+            }
+        </tbody>
+    </table>
+    <div class="cart-total">
+        <p><strong>Tổng tiền Thanh toán:</strong></p>
+        <p class="subtotal">Tổng tiền: @Model.TongTien.ToString("0,##0") đ</p>
+        <p>Phí vận chuyển: 25,000 đ</p>
+        <p class="total"><strong>Tổng tiền: @(String.Format("{0:#,##0}", Model.TongTien + 15000)) đ</strong></p>
+
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-action="ThanhToan" asp-controller="ThanhToan" class="checkout-btn text-center m-2">Đặt hàng</a>
+        }
+        else
+        {
+            <a href="/login.html?returnUrl=/ThanhToan.html" class="checkout-btn">Thanh toán</a>
+        }
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h3 class="title">Món ăn Khác</h3>
+                </div>
+            </div>
+            <vc:mon-ans></vc:mon-ans>
+        </div>
+    </div>
+</div>

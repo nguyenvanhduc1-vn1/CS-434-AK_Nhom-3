@@ -1,0 +1,60 @@
+﻿@model ShipperModel
+@{
+    ViewData["title"] = "Cập nhật  shipper";
+}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 col-12 mx-auto">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h3>Thêm người truy cập</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" asp-controller="Shipper" method="post">
+                        <input type="hidden" asp-for="MaShip" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="form-label">Tên Nhân Viên</label>
+                            <input asp-for="TenDN" type="text" class="form-control" />
+                            <span asp-validation-for="TenDN" class="text-danger" />
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="form-label">mật khẩu</label>
+                            <textarea asp-for="MatKhau" class="form-control"></textarea>
+                            <span asp-validation-for="MatKhau" class="text-danger" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <textarea asp-for="Email" class="form-control"></textarea>
+                            <span asp-validation-for="Email" class="text-danger" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label"> Số Điện thoại</label>
+                            <textarea asp-for="SoDienThoai" class="form-control"></textarea>
+                            <span asp-validation-for="SoDienThoai" class="text-danger" />
+                        </div>
+
+
+                        <div class="form-group m-3 text-end">
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+
+                        </div>
+                    </form>
+                    <a class="mt-2" asp-action="index">Danh sách  giao hàng  </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

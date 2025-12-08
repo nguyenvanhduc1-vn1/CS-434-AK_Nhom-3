@@ -1,0 +1,85 @@
+﻿@{
+    var hoaDons = ViewBag.HoaDons as List<WebDatMonAn.Models.HoaDonModel>;
+    var orderDetails = ViewBag.OrderDetails as List<WebDatMonAn.Models.CTHDModel>;
+}
+<main>
+    <div class="container">
+        <div class="accordion" id="accordionExample">
+            @for (int i = 0; i < hoaDons.Count; i++)
+            {
+                var hoadon = hoaDons[i];
+                var details = orderDetails.Where(od => od.MaHD == hoadon.MaHD).ToList();
+                var totalAmount = details.Sum(od => od.tongtien) + hoadon.phivanchuyen;
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button @(i != 0 ? "collapsed" : "")" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@i" aria-expanded="@(i == 0 ? "true" : "false")" aria-controls="collapse@i">
+                            Nơi nhận hàng : @hoadon.KhachHang.DiaChi
+                        </button>
+                    </h2>
+                    <div id="collapse@i" class="accordion-collapse collapse @(i == 0 ? "show" : "")" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="card" style="width: 50rem;">
+                                <div class="card-header">
+                                    Tên người nhận : @hoadon.KhachHang.TenTK
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <a class="sdt" href="">Số điện thoại : @hoadon.KhachHang.SoDienThoai</a>
+                                    </li>
+                                    <li class="list-group-item">Ngày đặt : @hoadon.NgayGiao</li>
+                                    <li class="list-group-item">Ghi chú : </li>
+                                    <li class="list-group-item">Mã đơn hàng : @hoadon.MaHD</li>
+                                </ul>
+                                <div class="container mt-5">
+                                    <h2 class="mb-4">Chi tiết đơn hàng</h2>
+                                    <table class="table table-bordered">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Món ăn</th>
+                                                <th scope="col">Số lượng</th>
+                                                <th scope="col">Đơn giá</th>
+                                                <th scope="col">Thành tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in details)
+                                            {
+                                                <tr>
+                                                    <td>@item.MonAn.TenMonAn</td>
+                                                    <td>@item.soluongban</td>
+                                                    <td>@item.dongiaban.ToString("#,###0")</td>
+                                                    <td>@item.tongtien.ToString("#,###0")</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <div class="list-group-item text-end">
+                                        <span class="text-muted">Tổng tiền (bao gồm phí ship: 15.000): </span>
+                                        <span class="text-black">@string.Format("{0:#,###0}", totalAmount)</span>
+
+                                    </div>
+                                    @if (hoadon.TrangThaiGiaoHang == 0) 
+                                    {
+                                        <div class="list-group-item text-end">
+                                            <form method="post" asp-action="Index">
+                                                <input type="hidden" name="maHD" value="@hoadon.MaHD" />
+                                                <button type="submit" class="btn btn-success">Xác nhận giao hàng</button>
+                                            </form>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="list-group-item text-end">
+                                            <span class="text-success">Đơn hàng đã giao</span>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</main>

@@ -1,0 +1,128 @@
+﻿<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="breadcrumb-tree">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Chi tiết món ăn</a></li>
+					<li class="active">Tên món ăn</li>
+				</ul>
+			</div>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- Product main img -->
+			<div class="col-md-5 col-md-push-2">
+				<div id="product-main-img">
+					<div class="product-preview">
+						<img src="path/to/image.jpg" alt="Tên món ăn">
+					</div>
+				</div>
+			</div>
+			<!-- /Product main img -->
+			<!-- Product details -->
+			<div class="col-md-5">
+				<div class="product-details">
+					<h2 class="product-name">Tên món ăn</h2>
+					<h3 class="product-name">Địa chỉ quán</h3>
+					<h4 class="product-name">
+						<a style="color:#0288d1;" href="#">Xem lượt đánh giá trên food</a>
+					</h4>
+					<div>
+						<div class="product-rating">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star-o"></i>
+						</div>
+						<a class="review-link" href="#">10 Review(s) | Add your review</a>
+					</div>
+					<div>
+						<h3 class="product-price">50,000 đ</h3>
+					</div>
+					<p>Mô tả món ăn...</p>
+
+					<!-- Thêm video -->
+					<div>
+						<h4 class="product-name">Video</h4>
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/BR_drFXVFyQ" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+					</div>
+
+					<ul class="product-links">
+						<li>Danh Mục:</li>
+						<li><a href="#">Tên danh mục</a></li>
+					</ul>
+
+					<ul class="product-links">
+						<li>Share:</li>
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /Product details -->
+			<!-- Comments section -->
+			<div class="col-md-12">
+				<div class="section-title">
+					<h4 class="title">Bình luận</h4>
+				</div>
+				<!-- Form bình luận -->
+				<form id="commentForm">
+					<div class="form-group">
+						<textarea class="form-control" id="comment" rows="4" placeholder="Nhập bình luận của bạn..."></textarea>
+					</div>
+					<button type="button" class="btn btn-primary" onclick="addComment()">Gửi bình luận</button>
+				</form>
+
+				<!-- Danh sách bình luận -->
+				<div class="comments" id="commentList">
+					<!-- Các bình luận sẽ được thêm vào đây -->
+				</div>
+			</div>
+			<!-- /Comments section -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+<!-- Section -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-title text-center">
+					<h3 class="title">Món ăn Khác</h3>
+				</div>
+			</div>
+
+			<!-- /product -->
+			<!-- product -->
+			<vc:mon-ans></vc:mon-ans>
+			<!-- /product -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /Section -->
+
+
+

@@ -1,0 +1,82 @@
+﻿@model X.PagedList.IPagedList<WebDatMonAn.Models.MonAnModel>
+
+@using X.PagedList.Mvc.Core;
+
+<!-- BREADCRUMB -->
+@Html.Partial("_SiderPartial")
+@Html.Partial("_Navigation")
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-3">
+                <!-- aside Widget -->
+                <div class="aside">
+                    <h3 class="aside-title">Danh mục</h3>
+                    <div class="checkbox-filter">
+                        <vc:tat-ca-danh-mucs></vc:tat-ca-danh-mucs>
+                    </div>
+                </div>
+                <!-- /aside Widget -->
+                <!-- aside Widget -->
+                <vc:mon-an-ban-chay></vc:mon-an-ban-chay>
+            </div>
+            <!-- /ASIDE -->
+            <!-- STORE -->
+            <div id="store" class="col-md-9">
+                <!-- store top filter -->
+                <!-- store products -->
+                <div class="row">
+                    <!-- product -->
+                    @Html.Partial("_DSMonAn")
+                </div>
+                <!-- /store products -->
+
+                <div class="pagination-container">
+                    @Html.PagedListPager(Model, page => Url.Action("Tatcamonan","Home", new { page }))
+                </div>
+
+                <style>
+                    .pagination-container {
+                        s display: flex;
+                        justify-content: center; /* Canh giữa thanh phân trang */
+                    }
+
+                    .pagination {
+                        display: flex;
+                        list-style: none; /* Loại bỏ các dấu chấm đầu dòng */
+                        padding: 0; /* Loại bỏ padding */
+                        margin: 0; /* Loại bỏ margin */
+                    }
+
+                        .pagination li {
+                            margin: 0 5px; /* Khoảng cách giữa các trang */
+                        }
+
+                            .pagination li a, .pagination li span {
+                                display: block;
+                                padding: 8px 12px;
+                                text-decoration: none; /* Bỏ gạch chân */
+                                color: #007bff; /* Màu chữ */
+                            }
+
+                            .pagination li.active span {
+                                font-weight: bold; /* In đậm trang hiện tại */
+                                color: #000; /* Màu chữ của trang hiện tại */
+                            }
+
+                            .pagination li.disabled span {
+                                color: #6c757d; /* Màu chữ của trang bị disable */
+                            }
+                </style>
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

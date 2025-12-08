@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewData["Title"] = "_HeaderPartial";
+}
+
+<!-- Spinner Start -->
+
+<header>
+	<!-- TOP HEADER -->
+	<div id="top-header">
+		<div class="container">
+			<ul class="header-links pull-left">
+				<li><a href="#"><i class="fa fa-phone"></i> +905807623</a></li>
+				<li><a href="#"><i class="fa fa-envelope-o"></i> kongkolp16@gmail.com</a></li>
+				<li><a href="#"><i class="fa fa-map-marker"></i> 44/3 Đà Sơn , Tp.Đà Nẵng</a></li>
+			</ul>
+			<ul class="header-links pull-right">
+				<li><a href="#"><i class="fa fa-dollar"></i> VND</a></li>
+				<li><a href="#"><i class="fa fa-user-o"></i> Account</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /TOP HEADER -->
+	<!-- MAIN HEADER -->
+	<div id="header">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!-- LOGO -->
+				<div class="col-md-3">
+					<div class="header-logo">
+						<a href="#" class="logo">
+							<img src="~/client/img/logo.png" style="height:100px;" alt="">
+						</a>
+					</div>
+				</div>
+				<!-- /LOGO -->
+				<!-- SEARCH BAR -->
+				<div class="col-md-6">
+					<div class="header-search">
+						<form asp-action="TimKiem" asp-controller="Home">
+
+							<input class="input" placeholder="Tìm kiếm"  name="query">
+							<button class="search-btn">Tìm kiếm</button>
+						</form>
+					</div>
+				</div>
+				<!-- /SEARCH BAR -->
+				<!-- ACCOUNT -->
+				<div class="col-md-3 clearfix">
+					<div class="header-ctn">
+						<!-- Wishlist -->
+						<!-- /Wishlist -->
+						@if (User.Identity.IsAuthenticated)
+						{
+							<vc:gio-hang></vc:gio-hang>
+
+
+							<div class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<i class="fa fa-user fa-2x"></i>
+									<span>@User.Identity.Name</span>
+
+								</a>
+								<div class="cart-dropdown">
+									<div class="cart-list">
+									</div>
+									<div class="cart-summary" >
+										<a href="#" class="btn btn-primary" style="display:block; margin-bottom:10px;">Thông tin cá nhân của: @User.Identity.Name</a>
+										<a asp-action="DoiMatKhau" asp-controller="TaiKhoan" style="display:block; margin-bottom:10px;" class="btn btn-primary">Thay đổi mật khẩu</a>
+										<a asp-action="XemDonHang" asp-controller="TaiKhoan" style="display:block; margin-bottom:10px;" class="btn btn-primary">xem đơn hàng</a>
+										<a asp-action="DangXuat" asp-controller="TaiKhoan" style="display:block; background:#D10024; border-color:D10024"; class="btn btn-primary">Đăng xuất <i class="fa fa-arrow-circle-right"></i></a>
+									</div>
+									</div>
+								</div>
+							<!-- Cart -->
+						
+							
+						}
+						else
+						{
+							<div class="dropdown">
+								<a asp-action="Login" asp-controller="TaiKhoan">
+									<i class="fa fa-user fa-2x"></i>
+									<span>Đăng nhập</span>
+
+								</a>
+
+							</div>
+						}
+						
+
+					
+						<!-- /Cart -->
+						<!-- Menu Toogle -->
+						<div class="menu-toggle">
+							<a href="#">
+								<i class="fa fa-bars"></i>
+								<span>Menu</span>
+							</a>
+						</div>
+						<!-- /Menu Toogle -->
+					</div>
+				</div>
+				<!-- /ACCOUNT -->
+			</div>
+			<!-- row -->
+		</div>
+		<!-- container -->
+	</div>
+	<!-- /MAIN HEADER -->
+</header>
+

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebDatMonAn.Models.DiaDiemModel>
+
+@{
+    ViewData["Title"] = "Danh sách địa điểm";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Thêm địa điểm</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center">Mã DD</th>
+            <th class="text-center">Tên Tỉnh/Thành</th>
+            <th class="text-center">Tên Quận/Huyện</th>
+            <th class="text-center">Tên Phường/Xã</th>
+            <th class="text-center"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center align-middle">@item.MaDD</td>
+                <td class="text-center align-middle">@item.TenTinhThanh</td>
+                <td class="text-center align-middle">@item.TenQuanHuyen</td>
+                <td class="text-center align-middle">@item.TenPhuongXa</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

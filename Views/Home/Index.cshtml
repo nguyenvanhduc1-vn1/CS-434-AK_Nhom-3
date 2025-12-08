@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MonAnModel>
+@Html.Partial("_SiderPartial")
+@Html.Partial("_Navigation")
+<!-- /SECTION -->
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+
+			<!-- section title -->
+			<div class="col-md-12">
+				<div class="section-title">
+					<h3 class="title">Món ăn mới nhất</h3>
+					<div class="section-nav">
+						<ul class="section-tab-nav tab-nav">
+						<vc:danh-mucs></vc:danh-mucs>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /section title -->
+			<!-- Products tab & slick -->
+			<div class="col-md-12">
+				<div class="row">
+					<div class="products-tabs">
+						<!-- tab -->
+						<div id="tab1" class="tab-pane active">
+							<div class="products-slick" data-nav="#slick-nav-1">
+								<!-- product -->
+								<!-- product -->
+								@foreach ( var item in Model)
+								{
+									<div class="product" >
+										<div class="product-img">
+											<img src="~/image/monan/@item.HinhAnh" alt="@item.TenMonAn">
+										</div>
+										<div class="product-body">
+											<p class="product-category">@item.DanhMuc.TenDanhMuc</p>
+											<h3 class="product-name"><a asp-action="Detail" asp-controller="Home" asp-route-Id="@item.MaMonAn" >@(item.TenMonAn.Length > 16 ? item.TenMonAn.Substring(0, 16) : item.TenMonAn)...</a></h3>
+											<h4 class="product-price">@item.DonGia.ToString("#,###0") đ </h4>
+											<div class="product-rating">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+											</div>
+
+										</div>
+										<div class="add-to-cart">
+
+											<a asp-action="ThemCart" asp-controller="GioHang" asp-route-Id="@item.MaMonAn" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+										</div>
+									</div>
+								}
+								<!-- /product -->
+							</div>
+							<div id="slick-nav-1" class="products-slick-nav"></div>
+						</div>
+						<!-- /tab -->
+					</div>
+				</div>
+			</div>
+			<!-- Products tab & slick -->
+		</div>
+		<!-- /row -->
+		<vc:mon-an-ban-nhieu-nhat></vc:mon-an-ban-nhieu-nhat>
+	</div>
+	<!-- /container -->
+</div>

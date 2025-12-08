@@ -1,0 +1,5 @@
+﻿@model IEnumerable<DanhMucModel>
+@foreach (var item in Model)
+{
+    <li><a asp-action="Index" asp-controller="DanhMuc" asp-route-Slug="@item.SlugDanhMuc" style="color:black;">@item.TenDanhMuc</a></li>
+}

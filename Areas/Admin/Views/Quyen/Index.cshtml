@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ChucNangModel>
+@{
+    ViewData["Title"] = "Thông tin quyền truy cập";
+}
+<main>
+    <div class="container-fluid px-4">
+        <h3 class="mt-4">Thông tin quyền  truy cập</h3>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="QuanTri">Trang quản trị</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                    <div class="card">
+                        <h3><a  asp-action="Create" asp-controller="Quyen" class="btn btn-primary">Thêm mới Quyền truy cập</a></h3>
+                    </div>
+
+                    <div class="datatable-container">
+                        <table id="myTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th data-sortable="true">
+                                        #
+                                    <th data-sortable="true">
+                                        Tên Quyền truy cập
+                                    </th>
+                                    <th data-sortable="true">
+                                        Mô tả
+                                  
+                                    <th data-sortable="true">Manager</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(Model != null)
+                                {
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr data-index="0">
+                                            <td>@item.MaCN</td>
+                                            <td>@item.TenQuyen</td>
+                                            <td>@item.MoTa</td>
+
+
+
+                                            <td>
+                                                <a class="btn btn-warning" asp-action="Edit" asp-controller="Quyen" asp-route-Id="@item.MaCN">Edit</a>
+                                                <a class="btn btn-danger" asp-action="Delete" asp-controller="Quyen" asp-route-Id="@item.MaCN">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+ }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<

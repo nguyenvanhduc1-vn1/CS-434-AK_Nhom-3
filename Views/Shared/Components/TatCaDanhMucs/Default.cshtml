@@ -1,0 +1,13 @@
+﻿@model IEnumerable<DanhMucModel>
+@foreach (var item in Model)
+{
+	<div class="input-checkbox">
+
+		<label for="category-1">
+			<span></span>
+			<h4><a asp-action="Index" asp-controller="DanhMuc" asp-route-Slug="@item.SlugDanhMuc" style="text-decoration:none; ">@item.TenDanhMuc</a></h4>
+
+		</label>
+	</div>
+   
+}

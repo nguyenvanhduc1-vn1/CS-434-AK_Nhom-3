@@ -1,0 +1,31 @@
+﻿@model List<MonAnModel>
+
+       @foreach (var item in Model)
+                                {
+                                    <tr data-index="0">
+                                        <td class="text-center align-middle">@item.MaMonAn</td>
+                                        <td class="text-center align-middle">@item.TenMonAn</td>
+                                        <td class="text-center align-middle"><img src="~/image/monan/@item.HinhAnh" style="height:100px;" /></td>
+                                        <td class="text-center align-middle">@item.DanhMuc.TenDanhMuc</td>
+                                       
+
+                                        @if (item.TrangThai == 1)
+                                        {
+                                            <td class="text-center align-middle">
+                                                <button class="btn btn-primary">Hiển thị</button>
+                                            </td class="text-center">
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center align-middle">
+                                                <button class="btn btn-warning"> Không Hiển thị</button>
+                                            </td>
+                                        }
+
+                                        <td class="text-center align-middle">
+                                            <a class="btn btn-warning " asp-action="ChiTiet" asp-controller="MonAn" asp-route-Id="@item.MaMonAn">Xem chi tiết</a>
+                                            <a class="btn btn-warning" asp-action="Edit" asp-controller="MonAn" asp-route-Id="@item.MaMonAn" >Edit</a>
+                                            <a class="btn btn-danger" asp-action="Delete" asp-controller="MonAn" asp-route-Id="@item.MaMonAn" >Delete</a>
+                                        </td>
+                                    </tr>
+                                }

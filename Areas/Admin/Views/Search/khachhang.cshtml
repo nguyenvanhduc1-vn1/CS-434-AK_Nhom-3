@@ -1,0 +1,19 @@
+﻿@model List<KhachHangModel>
+
+@foreach (var item in Model)
+{
+    <tr data-index="0">
+        <td>@item.MaKH</td>
+        <td>@item.TenTK</td>
+        @* <td>@item.DiaChi</td> *@
+        <td>@item.SoDienThoai</td>
+        <td>@item.Email</td>
+        <td>@item.DiaDiem.TenTinhThanh</td>
+        <td>
+            <a class="btn btn-warning" asp-action="Edit" asp-controller="Account" asp-route-Id="@item.MaKH">Edit</a>
+            <a class="btn btn-danger" asp-action="Delete" asp-controller="Account" asp-route-Id="@item.MaKH">Delete</a>
+        </td>
+
+
+    </tr>
+}

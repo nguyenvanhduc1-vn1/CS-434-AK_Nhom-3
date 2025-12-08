@@ -1,0 +1,53 @@
+﻿@model DiaDiemModel
+@{
+    ViewData["title"] = "Thêm mới  địa điểm";
+}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 col-12 mx-auto">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h3>Thêm mới địa điểm</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" asp-controller="DiaDiem" method="post">
+                        <input type="hidden" asp-for="MaDD" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="form-label">Tên Tỉnh Thành</label>
+                            <input asp-for="TenTinhThanh" type="text" class="form-control" />
+                            <span asp-validation-for="TenTinhThanh" class="text-danger" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Tên Quận Huyện</label>
+                            <textarea asp-for="TenQuanHuyen" class="form-control"></textarea>
+                            <span asp-validation-for="TenQuanHuyen" class="text-danger" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tên Phường xã</label>
+                            <textarea asp-for="TenPhuongXa" class="form-control"></textarea>
+                            <span asp-validation-for="TenPhuongXa" class="text-danger" />
+                        </div>
+
+                       
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+
+                        </div>
+                    </form>
+                    <a asp-action="index">Danh sách danh mục</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

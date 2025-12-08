@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ShipperModel>
+<main>
+    <div class="container-fluid px-4">
+        <h3 class="mt-4">Danh Sách danh mục</h3>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="QuanTri">Trang quản trị</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                    <div class="card">
+                        <h3><a asp-action="Create" asp-controller="Shipper" class="btn btn-primary">Thêm mới </a></h3>
+                    </div>
+
+                    <div class="datatable-container">
+                        <table id="myTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th data-sortable="true">
+                                        #
+                                    <th data-sortable="true">
+                                        Tên Shipper
+                                    </th>
+                                    <th data-sortable="true">
+                                       Số điện thoại
+                                    <th data-sortable="true">Email</th>
+                                    <th data-sortable="true">Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr data-index="0">
+                                        <td>@item.MaShip</td>
+                                        <td>@item.TenDN</td>
+                                        <td>@item.SoDienThoai</td>
+                                        <td>@item.Email</td>
+                                        <td>
+                                            <a class="btn btn-warning" asp-action="Edit" asp-controller="Shipper" asp-route-Id="@item.MaShip">Edit</a>
+                                            <a class="btn btn-danger" asp-action="Delete" asp-controller="Shipper" asp-route-Id="@item.MaShip">Delete</a>
+                                        </td>
+
+                                      
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<
