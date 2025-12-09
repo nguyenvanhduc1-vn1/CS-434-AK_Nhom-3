@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đăng ký tài khoản</title>
+  <link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+  <h2>Đăng ký tài khoản</h2>
+  <form id="registerForm">
+    <input name="name" placeholder="Tên tài khoản" required />
+    <input name="email" type="email" placeholder="Email" required />
+    <input name="password" type="password" placeholder="Mật khẩu (ít nhất 6 ký tự)" required />
+    <select name="role">
+      <option value="customer">Khách hàng</option>
+      <option value="admin">Admin</option>
+    </select>
+    <button type="submit">Đăng ký</button>
+  </form>
+  <p><a href="login.html">Đã có tài khoản? Đăng nhập</a></p>
+  <script src="../scripts/script.js"></script>
+</body>
+</html>

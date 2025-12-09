@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ứng dụng quản lý & đặt món ăn</title>
+  <link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+  <h1>Ứng dụng quản lý & đặt món ăn</h1>
+  <nav>
+    <span>Thông tin người dùng: <strong id="userEmail">Chưa đăng nhập</strong> <span id="userRole" class="badge">---</span></span>
+    <span>
+      <a href="index.html">Trang chủ</a>
+      <a href="menu.html">Menu</a>
+      <a href="orders.html">Đơn hàng</a>
+      <a href="admin.html">Admin</a>
+      <a href="login.html">Đăng nhập</a>
+      <a href="register.html">Đăng ký</a>
+      <a href="#" onclick="logout()">Đăng xuất</a>
+    </span>
+  </nav>
+
+  <section>
+    <p>Vào menu để xem món ăn, thêm vào giỏ, đặt hàng, và xem lịch sử đơn.</p>
+    <button onclick="location.href='menu.html'">Vào menu</button>
+  </section>
+
+  <script src="../scripts/script.js"></script>
+</body>
+</html>

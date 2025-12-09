@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu món ăn</title>
+  <link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+  <h2>Menu món ăn</h2>
+  <nav>
+    <span>Xin chào, <strong id="username">---</strong> (<span id="role">---</span>)</span>
+    <span>
+      <a href="index.html">Trang chủ</a>
+      <a href="#" onclick="logout()">Đăng xuất</a>
+    </span>
+  </nav>
+
+  <section id="filterSection">
+    <h3>Bộ lọc món ăn</h3>
+    <input id="searchInput" placeholder="Tìm món ăn..." />
+    <select id="filterCategory">
+      <option value="">Tất cả loại</option>
+      <option value="Món chính">Món chính</option>
+      <option value="Tráng miệng">Tráng miệng</option>
+      <option value="Đồ uống">Đồ uống</option>
+    </select>
+    <select id="filterRating">
+      <option value="">Tất cả đánh giá</option>
+      <option value="4">Từ 4 sao</option>
+      <option value="5">5 sao</option>
+    </select>
+    <select id="filterPrice">
+      <option value="">Tất cả giá</option>
+      <option value="low">Dưới 50.000đ</option>
+      <option value="high">Trên 50.000đ</option>
+    </select>
+    <button id="searchBtn">Lọc</button>
+    <button onclick="clearFilters()">Xóa lọc</button>
+  </section>
+
+  <section id="menuSection">
+    <h3>Danh sách món ăn</h3>
+    <ul id="dishes" class="grid"></ul>
+  </section>
+
+  <section id="cartSection">
+    <h3>Giỏ hàng</h3>
+    <ul id="cartItems"></ul>
+    <p><strong>Tổng:</strong> <span id="cartTotal">0đ</span></p>
+    <button onclick="placeOrder()">Đặt hàng</button>
+    <button onclick="loadMyOrders();document.getElementById('ordersSection').style.display='block'">Xem lịch sử đơn hàng</button>
+  </section>
+
+  <section id="ordersSection" style="display:none;">
+    <h3>Lịch sử đơn hàng</h3>
+    <select id="filterStatus">
+      <option value="">Tất cả</option>
+      <option value="pending">Đang chuẩn bị</option>
+      <option value="confirmed">Đang giao</option>
+      <option value="delivered">Đã giao</option>
+      <option value="cancelled">Đã huỷ</option>
+    </select>
+    <input id="searchOrder" placeholder="Tìm theo mã đơn hoặc tên món" />
+    <button onclick="filterOrders()">Lọc đơn hàng</button>
+    <ul id="orders"></ul>
+  </section>
+
+  <script src="../scripts/script.js"></script>
+</body>
+</html>

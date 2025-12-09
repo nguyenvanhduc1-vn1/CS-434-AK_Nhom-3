@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quản lý món ăn (Admin)</title>
+  <link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+  <h1>Quản lý món ăn (Admin)</h1>
+  <nav>
+    <span>Admin panel</span>
+    <span>
+      <a href="menu.html">Menu</a>
+      <a href="orders.html">Đơn hàng</a>
+      <a href="#" onclick="logout()">Đăng xuất</a>
+    </span>
+  </nav>
+
+  <section>
+    <h3>Thêm món mới</h3>
+    <form id="addDishForm">
+      <input name="name" placeholder="Tên món" required />
+      <input name="price" type="number" placeholder="Giá" required />
+      <select name="category">
+        <option value="Món chính">Món chính</option>
+        <option value="Tráng miệng">Tráng miệng</option>
+        <option value="Đồ uống">Đồ uống</option>
+      </select>
+      <textarea name="description" placeholder="Mô tả"></textarea>
+      <button type="submit">Thêm món</button>
+    </form>
+  </section>
+
+  <section>
+    <h3>Danh sách món ăn</h3>
+    <ul id="adminDishes" class="grid"></ul>
+  </section>
+
+  <script src="../scripts/script.js"></script>
+</body>
+</html>
